@@ -10,11 +10,15 @@ fi
 export PATH=/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin:/home/oracle/oracle-scripts
 export START_PATH=$PATH
 
-function showora()
+function showoraenv()
 {
-echo "ORACLE_HOME     : $ORACLE_HOME"
-echo "GRID_HOME       : $GRID_HOME"
-echo "ORACLE_SID      : $ORACLE_SID"
+echo -n "ORACLE_HOME     : $ORACLE_HOME"
+if [ -d "$ORACLE_HOME" ]; then echo " (present)"; else echo ""; fi
+echo -n "GRID_HOME       : $GRID_HOME"
+if [ -d "$ORACLE_HOME" ]; then echo " (present)"; else echo ""; fi
+echo -n "ORACLE_SID      : $ORACLE_SID"
+RUNNING=$(ps -ef | grep -v grep | grep pmon_$ORACLE_SID)
+if [ -n "$RUNNING" ]; then echo " (running)"; else echo ""; fi
 echo "PATH            : $PATH"
 echo "LD_LIBRARY_PATH : $LD_LIBRARY_PATH"
 }
@@ -133,5 +137,4 @@ if [ -z "$PS1" ]; then
    return
 fi
 
-db193
-setsid db19c
+db193 test1db

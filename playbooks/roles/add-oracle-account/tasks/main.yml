@@ -70,3 +70,8 @@
     owner: oracle
     group: dba
     mode: '0644'
+- name: Add oracle to asmdba asmoper and asmadmin groups
+  ansible.builtin.user:
+    name: oracle
+    groups: asmdba,asmoper,asmadmin
+    append: yes

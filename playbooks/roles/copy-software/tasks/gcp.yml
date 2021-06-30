@@ -1,0 +1,136 @@
+---
+# tasks file for GCP
+#
+- name: Copy database 19
+  community.google.gc_storage:
+    bucket: "{{ bucket_name }}"
+    object: "{{ db19_file }}"
+    gs_access_key: "{{ access_key }}"
+    gs_secret_key: "{{ secret_key }}"
+    dest: "/home/oracle/software/{{ db19_file }}"
+    mode: get
+  ignore_errors: yes
+- name: Change file ownership
+  ansible.builtin.file:
+    path: "/home/oracle/software/{{ db19_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+#
+- name: Copy database 18
+  community.google.gc_storage:
+    bucket: "{{ bucket_name }}"
+    object: "{{ db18_file }}"
+    gs_access_key: "{{ access_key }}"
+    gs_secret_key: "{{ secret_key }}"
+    dest: "/home/oracle/software/{{ db18_file }}"
+    mode: get
+  ignore_errors: yes
+- name: Change file ownership
+  ansible.builtin.file:
+    path: "/home/oracle/software/{{ db18_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+#
+- name: Copy database 12.2
+  community.google.gc_storage:
+    bucket: "{{ bucket_name }}"
+    object: "{{ db122_file }}"
+    gs_access_key: "{{ access_key }}"
+    gs_secret_key: "{{ secret_key }}"
+    dest: "/home/oracle/software/{{ db122_file }}"
+    mode: get
+  ignore_errors: yes
+- name: Change file ownership
+  ansible.builtin.file:
+    path: "/home/oracle/software/{{ db122_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+#
+- name: Copy database 12.1 1 of 2
+  community.google.gc_storage:
+    bucket: "{{ bucket_name }}"
+    object: "{{ db121_1_file }}"
+    gs_access_key: "{{ access_key }}"
+    gs_secret_key: "{{ secret_key }}"
+    dest: "/home/oracle/software/{{ db121_1_file }}"
+    mode: get
+  ignore_errors: yes
+- name: Copy database 12.1 2 of 2
+  community.google.gc_storage:
+    bucket: "{{ bucket_name }}"
+    object: "{{ db121_2_file }}"
+    gs_access_key: "{{ access_key }}"
+    gs_secret_key: "{{ secret_key }}"
+    dest: "/home/oracle/software/{{ db121_2_file }}"
+    mode: get
+  ignore_errors: yes
+- name: Change file ownership
+  ansible.builtin.file:
+    path: "/home/oracle/software/{{ db121_1_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+- name: Change file ownership
+  ansible.builtin.file:
+    path: "/home/oracle/software/{{ db121_2_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+#
+- name: Copy database 11.2 1 of 2
+  community.google.gc_storage:
+    bucket: "{{ bucket_name }}"
+    object: "{{ db112_1_file }}"
+    gs_access_key: "{{ access_key }}"
+    gs_secret_key: "{{ secret_key }}"
+    dest: "/home/oracle/software/{{ db112_1_file }}"
+    mode: get
+  ignore_errors: yes
+- name: Copy database 11.2 2 of 2
+  community.google.gc_storage:
+    bucket: "{{ bucket_name }}"
+    object: "{{ db112_2_file }}"
+    gs_access_key: "{{ access_key }}"
+    gs_secret_key: "{{ secret_key }}"
+    dest: "/home/oracle/software/{{ db112_2_file }}"
+    mode: get
+  ignore_errors: yes
+- name: Change file ownership
+  ansible.builtin.file:
+    path: "/home/oracle/software/{{ db112_1_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+- name: Change file ownership
+  ansible.builtin.file:
+    path: "/home/oracle/software/{{ db112_2_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+#
+- name: Copy grid
+  community.google.gc_storage:
+    bucket: "{{ bucket_name }}"
+    object: "{{ grid_file }}"
+    gs_access_key: "{{ access_key }}"
+    gs_secret_key: "{{ secret_key }}"
+    dest: "/home/oracle/software/{{ grid_file }}"
+    mode: get
+  ignore_errors: yes
+- name: Change file ownership
+  ansible.builtin.file:
+    path: "/home/oracle/software/{{ grid_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes

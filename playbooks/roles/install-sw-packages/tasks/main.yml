@@ -35,3 +35,18 @@
 - name: Install boto python package
   pip:
     name: boto
+- name: Install the latest epel-release
+  yum:
+    name: epel-release
+    state: latest
+- name: Install the latest ansible
+  yum:
+    name: ansible
+    state: latest
+- name: Install rubrik_cdm python package
+  pip:
+    name: rubrik_cdm
+- name: Add Galaxy collection
+  become: true
+  become_user: oracle
+  command: "ansible-galaxy collection install rubrikinc.cdm"

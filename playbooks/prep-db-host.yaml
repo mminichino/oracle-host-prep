@@ -4,6 +4,7 @@
 # var:bucket
 # var:key
 # var:secret
+# var:swap
 #
 - name: Prep database host
   hosts: all
@@ -13,3 +14,4 @@
     - install-sw-packages
     - install-db-package
     - copy-software
+    - { role: make-swap, when: swap is defined and swap != '' }
