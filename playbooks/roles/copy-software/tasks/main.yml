@@ -1,0 +1,255 @@
+---
+# tasks file for copy-software
+- name: Create /u01
+  ansible.builtin.file:
+    path: /u01/app/oracle
+    state: directory
+    mode: '0755'
+    owner: oracle
+    group: dba
+    recurse: yes
+- name: Create inventory directory
+  ansible.builtin.file:
+    path: /u01/app/oraInventory
+    state: directory
+    mode: '0755'
+    owner: oracle
+    group: dba
+    recurse: yes
+- name: Create /u02
+  ansible.builtin.file:
+    path: /u02/app/grid
+    state: directory
+    mode: '0755'
+    owner: oracle
+    group: dba
+    recurse: yes
+- name: Create /u03
+  ansible.builtin.file:
+    path: /u03
+    state: directory
+    mode: '0755'
+    owner: oracle
+    group: dba
+    recurse: yes
+- name: Create software directory
+  ansible.builtin.file:
+    path: /home/oracle/software
+    state: directory
+    mode: '0755'
+    owner: oracle
+    group: dba
+    recurse: yes
+#
+- name: Copy database 19
+  community.google.gc_storage:
+    bucket: "{{ bucket_name }}"
+    object: "{{ db19_file }}"
+    gs_access_key: "{{ access_key }}"
+    gs_secret_key: "{{ secret_key }}"
+    dest: "/home/oracle/software/{{ db19_file }}"
+    mode: get
+  ignore_errors: yes
+  when: cloud_type == 'gcp'
+- name: Change file ownership
+  ansible.builtin.file:
+    path: "/home/oracle/software/{{ db19_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+#
+- name: Copy database 18
+  community.google.gc_storage:
+    bucket: "{{ bucket_name }}"
+    object: "{{ db18_file }}"
+    gs_access_key: "{{ access_key }}"
+    gs_secret_key: "{{ secret_key }}"
+    dest: "/home/oracle/software/{{ db18_file }}"
+    mode: get
+  ignore_errors: yes
+  when: cloud_type == 'gcp'
+- name: Change file ownership
+  ansible.builtin.file:
+    path: "/home/oracle/software/{{ db18_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+#
+- name: Copy database 12.2
+  community.google.gc_storage:
+    bucket: "{{ bucket_name }}"
+    object: "{{ db122_file }}"
+    gs_access_key: "{{ access_key }}"
+    gs_secret_key: "{{ secret_key }}"
+    dest: "/home/oracle/software/{{ db122_file }}"
+    mode: get
+  ignore_errors: yes
+  when: cloud_type == 'gcp'
+- name: Change file ownership
+  ansible.builtin.file:
+    path: "/home/oracle/software/{{ db122_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+#
+- name: Copy database 12.1 1 of 2
+  community.google.gc_storage:
+    bucket: "{{ bucket_name }}"
+    object: "{{ db121_1_file }}"
+    gs_access_key: "{{ access_key }}"
+    gs_secret_key: "{{ secret_key }}"
+    dest: "/home/oracle/software/{{ db121_1_file }}"
+    mode: get
+  ignore_errors: yes
+  when: cloud_type == 'gcp'
+- name: Copy database 12.1 2 of 2
+  community.google.gc_storage:
+    bucket: "{{ bucket_name }}"
+    object: "{{ db121_2_file }}"
+    gs_access_key: "{{ access_key }}"
+    gs_secret_key: "{{ secret_key }}"
+    dest: "/home/oracle/software/{{ db121_2_file }}"
+    mode: get
+  ignore_errors: yes
+  when: cloud_type == 'gcp'
+- name: Change file ownership
+  ansible.builtin.file:
+    path: "/home/oracle/software/{{ db121_1_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+- name: Change file ownership
+  ansible.builtin.file:
+    path: "/home/oracle/software/{{ db121_2_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+#
+- name: Copy database 11.2 1 of 2
+  community.google.gc_storage:
+    bucket: "{{ bucket_name }}"
+    object: "{{ db112_1_file }}"
+    gs_access_key: "{{ access_key }}"
+    gs_secret_key: "{{ secret_key }}"
+    dest: "/home/oracle/software/{{ db112_1_file }}"
+    mode: get
+  ignore_errors: yes
+  when: cloud_type == 'gcp'
+- name: Copy database 11.2 2 of 2
+  community.google.gc_storage:
+    bucket: "{{ bucket_name }}"
+    object: "{{ db112_2_file }}"
+    gs_access_key: "{{ access_key }}"
+    gs_secret_key: "{{ secret_key }}"
+    dest: "/home/oracle/software/{{ db112_2_file }}"
+    mode: get
+  ignore_errors: yes
+  when: cloud_type == 'gcp'
+- name: Change file ownership
+  ansible.builtin.file:
+    path: "/home/oracle/software/{{ db112_1_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+- name: Change file ownership
+  ansible.builtin.file:
+    path: "/home/oracle/software/{{ db112_2_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+#
+- name: Copy grid
+  community.google.gc_storage:
+    bucket: "{{ bucket_name }}"
+    object: "{{ grid_file }}"
+    gs_access_key: "{{ access_key }}"
+    gs_secret_key: "{{ secret_key }}"
+    dest: "/home/oracle/software/{{ grid_file }}"
+    mode: get
+  ignore_errors: yes
+  when: cloud_type == 'gcp'
+- name: Change file ownership
+  ansible.builtin.file:
+    path: "/home/oracle/software/{{ grid_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+#
+- name: Create db19 home
+  ansible.builtin.file:
+    path: /u01/app/oracle/product/19.3.0/dbhome_1
+    state: directory
+    mode: '0755'
+    owner: oracle
+    group: dba
+    recurse: yes
+- name: Create grid home
+  ansible.builtin.file:
+    path: /u02/app/grid/product/19.3.0/grid_1
+    state: directory
+    mode: '0755'
+    owner: oracle
+    group: dba
+    recurse: yes
+- name: Extract db19 home
+  ansible.builtin.unarchive:
+    src: "/home/oracle/software/{{ db19_file }}"
+    dest: /u01/app/oracle/product/19.3.0/dbhome_1
+    remote_src: yes
+    owner: oracle
+    group: dba
+- name: Extract grid home
+  ansible.builtin.unarchive:
+    src: "/home/oracle/software/{{ grid_file }}"
+    dest: /u02/app/grid/product/19.3.0/grid_1
+    remote_src: yes
+    owner: oracle
+    group: dba
+- name: Install cvuqdisk
+  yum:
+    name: /u02/app/grid/product/19.3.0/grid_1/cv/rpm/cvuqdisk-1.0.10-1.rpm
+    state: present
+- name: Copy db create response file
+  ansible.builtin.copy:
+    src: templates/db_create_193.rsp
+    dest: /home/oracle/db_create_193.rsp
+    owner: oracle
+    group: dba
+    mode: '0644'
+- name: Copy db grid response file
+  ansible.builtin.copy:
+    src: templates/db_grid_193.rsp
+    dest: /home/oracle/db_grid_193.rsp
+    owner: oracle
+    group: dba
+    mode: '0644'
+- name: Copy db install response file
+  ansible.builtin.copy:
+    src: templates/db_install_193.rsp
+    dest: /home/oracle/db_install_193.rsp
+    owner: oracle
+    group: dba
+    mode: '0644'
+- name: Copy udev rules
+  ansible.builtin.copy:
+    src: templates/96-asm.rules
+    dest: /etc/udev/rules.d/96-asm.rules
+    owner: root
+    group: root
+    mode: '0644'
+- name: Clone oracle-scripts repo
+  ansible.builtin.git:
+    repo: https://github.com/mminichino/oracle-scripts
+    dest: /home/oracle/oracle-scripts
+- name: Clone pockit repo
+  ansible.builtin.git:
+    repo: https://github.com/mminichino/pockit
+    dest: /home/oracle/pockit

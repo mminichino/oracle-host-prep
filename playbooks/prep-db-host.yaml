@@ -1,0 +1,15 @@
+---
+#
+# var:cloud
+# var:bucket
+# var:key
+# var:secret
+#
+- name: Prep database host
+  hosts: all
+  gather_facts: no
+  roles:
+    - add-oracle-account
+    - install-sw-packages
+    - install-db-package
+    - copy-software

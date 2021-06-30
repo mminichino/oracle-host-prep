@@ -1,0 +1,37 @@
+---
+# tasks file for install-sw-packages
+- name: Install the latest wget
+  yum:
+    name: wget
+    state: latest
+- name: Install the latest git
+  yum:
+    name: git
+    state: latest
+- name: Install the latest net-tools
+  yum:
+    name: net-tools
+    state: latest
+- name: Install the latest vim-enhanced
+  yum:
+    name: vim-enhanced
+    state: latest
+- name: Install the latest openssl
+  yum:
+    name: openssl
+    state: latest
+- name: Install the latest tar
+  yum:
+    name: tar
+    state: latest
+- name: Install the latest python-setuptools
+  yum:
+    name: python-setuptools
+    state: latest
+- name: Install the latest python-pip
+  yum:
+    name: python-pip
+    state: latest
+- name: Install boto python package
+  pip:
+    name: boto

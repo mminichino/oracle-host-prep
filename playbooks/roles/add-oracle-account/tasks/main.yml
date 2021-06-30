@@ -1,0 +1,72 @@
+---
+# tasks file for add-oracle-account
+- name: Ensure group dba exists
+  ansible.builtin.group:
+    name: dba
+    state: present
+    gid: 502
+- name: Ensure group asmdba exists
+  ansible.builtin.group:
+    name: asmdba
+    state: present
+    gid: 503
+- name: Ensure group asmoper exists
+  ansible.builtin.group:
+    name: asmoper
+    state: present
+    gid: 504
+- name: Ensure group asmadmin exists
+  ansible.builtin.group:
+    name: asmadmin
+    state: present
+    gid: 505
+- name: Ensure group oinstall exists
+  ansible.builtin.group:
+    name: oinstall
+    state: present
+    gid: 506
+- name: Ensure group oper exists
+  ansible.builtin.group:
+    name: oper
+    state: present
+    gid: 507
+- name: Ensure group backupdba exists
+  ansible.builtin.group:
+    name: backupdba
+    state: present
+    gid: 508
+- name: Ensure group dgdba exists
+  ansible.builtin.group:
+    name: dgdba
+    state: present
+    gid: 509
+- name: Ensure group kmdba exists
+  ansible.builtin.group:
+    name: kmdba
+    state: present
+    gid: 510
+- name: Ensure group racdba exists
+  ansible.builtin.group:
+    name: racdba
+    state: present
+    gid: 511
+- name: Create oracle user
+  ansible.builtin.user:
+    name: oracle
+    uid: 501
+    group: dba
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_file: .ssh/id_rsa
+- name: Set authorized key
+  ansible.posix.authorized_key:
+    user: oracle
+    state: present
+    key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+- name: Copy bashrc
+  ansible.builtin.copy:
+    src: templates/bashrc
+    dest: /home/oracle/.bashrc
+    owner: oracle
+    group: dba
+    mode: '0644'
