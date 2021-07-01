@@ -166,18 +166,26 @@
     group: dba
     mode: '0644'
 - name: Clone oracle-scripts repo
+  become: true
+  become_user: oracle
   ansible.builtin.git:
     repo: https://github.com/mminichino/oracle-scripts
     dest: /home/oracle/oracle-scripts
 - name: Clone pockit repo
+  become: true
+  become_user: oracle
   ansible.builtin.git:
     repo: https://github.com/mminichino/pockit
     dest: /home/oracle/pockit
 - name: Clone rubrik-toolkit repo
+  become: true
+  become_user: oracle
   ansible.builtin.git:
     repo: https://github.com/mminichino/rubrik-toolkit
     dest: /home/oracle/rubrik-toolkit
 - name: Clone ansible-helper repo
+  become: true
+  become_user: oracle
   ansible.builtin.git:
     repo: https://github.com/mminichino/ansible-helper
     dest: /home/oracle/ansible-helper

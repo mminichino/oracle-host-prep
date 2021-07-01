@@ -43,6 +43,10 @@
   yum:
     name: ansible
     state: latest
+- name: Install the latest java
+  yum:
+    name: java
+    state: latest
 - name: Install rubrik_cdm python package
   pip:
     name: rubrik_cdm
