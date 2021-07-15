@@ -78,4 +78,4 @@
     path: /db01
     src: /dev/mapper/oradata-db01
     fstype: xfs
-    state: present
+    state: mounted
