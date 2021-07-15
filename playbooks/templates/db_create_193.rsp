@@ -408,7 +408,7 @@ datafileJarLocation=
 # Default value : $ORACLE_BASE/oradata
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-datafileDestination=/u03/test1db/dbf
+datafileDestination=/db01/test1db/dbf
 
 #-----------------------------------------------------------------------------
 # Name          : recoveryAreaDestination
@@ -418,7 +418,7 @@ datafileDestination=/u03/test1db/dbf
 # Default value : $ORACLE_BASE/flash_recovery_area
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-recoveryAreaDestination=/u03/test1db/fra
+recoveryAreaDestination=/db01/test1db/fra
 
 #-----------------------------------------------------------------------------
 # Name          : storageType

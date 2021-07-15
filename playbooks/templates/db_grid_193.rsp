@@ -1,10 +1,10 @@
 oracle.install.responseFileVersion=/oracle/install/rspfmt_crsinstall_response_schema_v19.0.0
 
-INVENTORY_LOCATION=/u01/app/oraInventory
+INVENTORY_LOCATION=/opt/app/oraInventory
 
 oracle.install.option=HA_CONFIG
 
-ORACLE_BASE=/u01/app/oracle
+ORACLE_BASE=/opt/app/oracle
 
 oracle.install.asm.OSDBA=asmdba
 

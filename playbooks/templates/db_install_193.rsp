@@ -39,16 +39,16 @@ UNIX_GROUP_NAME=dba
 # This is an optional parameter if installing on
 # Windows based Operating System.
 #-------------------------------------------------------------------------------
-INVENTORY_LOCATION=/u01/app/oraInventory
+INVENTORY_LOCATION=/opt/app/oraInventory
 #-------------------------------------------------------------------------------
 # Specify the complete path of the Oracle Home. 
 #-------------------------------------------------------------------------------
-ORACLE_HOME=/u01/app/oracle/product/19.3.0/dbhome_1
+ORACLE_HOME=/opt/app/oracle/product/19.3.0/dbhome_1
 
 #-------------------------------------------------------------------------------
 # Specify the complete path of the Oracle Base. 
 #-------------------------------------------------------------------------------
-ORACLE_BASE=/u01/app/oracle
+ORACLE_BASE=/opt/app/oracle
 
 #-------------------------------------------------------------------------------
 # Specify the installation edition of the component.                     
