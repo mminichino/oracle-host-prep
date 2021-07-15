@@ -154,6 +154,13 @@
     owner: oracle
     group: dba
     mode: '0644'
+- name: Copy udev script
+  ansible.builtin.copy:
+    src: templates/udev-reload.sh
+    dest: /home/oracle/udev-reload.sh
+    owner: oracle
+    group: dba
+    mode: '0755'
 - name: Copy udev rules
   ansible.builtin.copy:
     src: templates/96-asm.rules
@@ -161,6 +168,7 @@
     owner: root
     group: root
     mode: '0644'
+- shell: "udevadm control --reload-rules && udevadm trigger"
 - name: Copy README
   ansible.builtin.copy:
     src: templates/README.txt

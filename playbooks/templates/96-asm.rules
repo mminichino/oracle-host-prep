@@ -1,1 +1,1 @@
-ACTION=="add|change", KERNEL=="sdb", SYMLINK+="oracleasm/DATA", GROUP="dba", OWNER="oracle", MODE="0660"
+ACTION=="add|change", KERNEL=="sdc", SYMLINK+="oracleasm/DATA", GROUP="dba", OWNER="oracle", MODE="0660"
