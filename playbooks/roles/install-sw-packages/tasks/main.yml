@@ -28,6 +28,10 @@
   yum:
     name: python-setuptools
     state: latest
+- name: Install the latest epel-release
+  yum:
+    name: epel-release
+    state: latest
 - name: Install the latest python-pip
   yum:
     name: python-pip
@@ -35,10 +39,6 @@
 - name: Install boto python package
   pip:
     name: boto
-- name: Install the latest epel-release
-  yum:
-    name: epel-release
-    state: latest
 - name: Install the latest ansible
   yum:
     name: ansible
@@ -54,3 +54,28 @@
   become: true
   become_user: oracle
   command: "ansible-galaxy collection install rubrikinc.cdm"
+- name: Create db01 partition
+  community.general.parted:
+    device: "{{ data_dev }}"
+    number: 1
+    state: present
+- name: Creates oradata volume group 
+  lvg:
+    vg: oradata
+    pvs: "{{ data_dev }}1"
+    pesize: 32
+- name: Create db01 logical volume
+  lvol:
+    vg: oradata
+    lv: db01
+    size: "100%FREE"
+- name: Create db01 filesystem 
+  filesystem:
+    fstype: xfs
+    dev: /dev/mapper/oradata-db01
+- name: Mount db01
+  mount:
+    path: /db01
+    src: /dev/mapper/oradata-db01
+    fstype: xfs
+    state: present

@@ -1,0 +1,81 @@
+---
+# tasks file for local
+#
+- name: Copy database 19
+  ansible.builtin.copy:
+    src: "{{ sw_dir }}/{{ db19_file }}"
+    dest: "/home/oracle/software/{{ db19_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+#
+- name: Copy database 18
+  ansible.builtin.copy:
+    src: "{{ sw_dir }}/{{ db18_file }}"
+    dest: "/home/oracle/software/{{ db18_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+#
+- name: Copy database 12.2
+  ansible.builtin.copy:
+    src: "{{ sw_dir }}/{{ db122_file }}"
+    dest: "/home/oracle/software/{{ db122_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+#
+- name: Copy database 12.1 1 of 2
+  ansible.builtin.copy:
+    src: "{{ sw_dir }}/{{ db121_1_file }}"
+    dest: "/home/oracle/software/{{ db121_1_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+- name: Copy database 12.1 2 of 2
+  ansible.builtin.copy:
+    src: "{{ sw_dir }}/{{ db121_2_file }}"
+    dest: "/home/oracle/software/{{ db121_2_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+#
+- name: Copy database 11.2 1 of 2
+  ansible.builtin.copy:
+    src: "{{ sw_dir }}/{{ db112_1_file }}"
+    dest: "/home/oracle/software/{{ db112_1_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+- name: Copy database 11.2 2 of 2
+  ansible.builtin.copy:
+    src: "{{ sw_dir }}/{{ db112_2_file }}"
+    dest: "/home/oracle/software/{{ db112_2_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+#
+- name: Copy grid
+  ansible.builtin.copy:
+    src: "{{ sw_dir }}/{{ grid_file }}"
+    dest: "/home/oracle/software/{{ grid_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes
+#
+- name: Copy swingbench
+  ansible.builtin.copy:
+    src: "{{ sw_dir }}/{{ swb_file }}"
+    dest: "/home/oracle/software/{{ swb_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes

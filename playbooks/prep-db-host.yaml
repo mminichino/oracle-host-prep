@@ -4,7 +4,9 @@
 # var:bucket
 # var:key
 # var:secret
+# var:software
 # var:swap
+# var:root
 #
 - name: Prep database host
   hosts: all

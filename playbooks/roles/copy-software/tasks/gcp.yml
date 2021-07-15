@@ -134,3 +134,20 @@
     group: dba
     mode: '0644'
   ignore_errors: yes
+#
+- name: Copy swingbench
+  community.google.gc_storage:
+    bucket: "{{ bucket_name }}"
+    object: "{{ swb_file }}"
+    gs_access_key: "{{ access_key }}"
+    gs_secret_key: "{{ secret_key }}"
+    dest: "/home/oracle/software/{{ swb_file }}"
+    mode: get
+  ignore_errors: yes
+- name: Change file ownership
+  ansible.builtin.file:
+    path: "/home/oracle/software/{{ swb_file }}"
+    owner: oracle
+    group: dba
+    mode: '0644'
+  ignore_errors: yes

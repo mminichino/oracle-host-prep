@@ -3,8 +3,11 @@ ansible_become: yes
 ansible_become_method: sudo
 ansible_user: "{{ user_name if user_name is defined else 'admin' }}"
 ansible_password: "{{ ask_password if ask_password is defined else lookup('vars',password_var) if password_var is defined else None }}"
-cloud_type: "{{ cloud if cloud is defined else 'aws' }}"
+cloud_type: "{{ cloud if cloud is defined else 'none' }}"
 bucket_name: "{{ bucket if bucket is defined else 'software' }}"
 access_key: "{{ key if key is defined else None }}"
 secret_key: "{{ secret if secret is defined else None }}"
+sw_dir: "{{ software if software is defined else '/opt/software' }}"
 swap_dev: "{{ swap if swap is defined else None }}"
+data_dev: "{{ data if data is defined else '/dev/sdb' }}"
+root_dir: "{{ root if root is defined else '/opt' }}"

@@ -8,4 +8,5 @@ db121_2_file: linuxamd64_12102_database_2of2.zip
 db112_1_file: p13390677_112040_Linux-x86-64_1of7.zip
 db112_2_file: p13390677_112040_Linux-x86-64_2of7.zip
 grid_file: LINUX.X64_193000_grid_home.zip
+swb_file: swingbenchlatest.zip
 install_file_location: "{{ sw_dir if sw_dir is defined else lookup('env','HOME') }}"

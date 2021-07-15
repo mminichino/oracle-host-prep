@@ -1,8 +1,8 @@
 ---
 # tasks file for copy-software
-- name: Create /u01
+- name: Create software directory
   ansible.builtin.file:
-    path: /u01/app/oracle
+    path: "{{ root_dir }}/app/oracle"
     state: directory
     mode: '0755'
     owner: oracle
@@ -10,23 +10,23 @@
     recurse: yes
 - name: Create inventory directory
   ansible.builtin.file:
-    path: /u01/app/oraInventory
+    path: "{{ root_dir }}/app/oraInventory"
     state: directory
     mode: '0755'
     owner: oracle
     group: dba
     recurse: yes
-- name: Create /u02
+- name: Create grid directory
   ansible.builtin.file:
-    path: /u02/app/grid
+    path: "{{ root_dir }}/app/grid"
     state: directory
     mode: '0755'
     owner: oracle
     group: dba
     recurse: yes
-- name: Create /u03
+- name: Create /db01
   ansible.builtin.file:
-    path: /u03
+    path: /db01
     state: directory
     mode: '0755'
     owner: oracle
@@ -44,10 +44,13 @@
 - name: Copy software files in GCP
   include: gcp.yml
   when: cloud_type == 'gcp'
+- name: Copy software files local
+  include: local.yml
+  when: cloud_type == 'none'
 #
 - name: Create db19 home
   ansible.builtin.file:
-    path: /u01/app/oracle/product/19.3.0/dbhome_1
+    path: "{{ root_dir }}/app/oracle/product/19.3.0/dbhome_1"
     state: directory
     mode: '0755'
     owner: oracle
@@ -55,7 +58,7 @@
     recurse: yes
 - name: Create db18 home
   ansible.builtin.file:
-    path: /u01/app/oracle/product/18.3.0/dbhome_1
+    path: "{{ root_dir }}/app/oracle/product/18.3.0/dbhome_1"
     state: directory
     mode: '0755'
     owner: oracle
@@ -63,7 +66,7 @@
     recurse: yes
 - name: Create db122 home
   ansible.builtin.file:
-    path: /u01/app/oracle/product/12.2.0/dbhome_1
+    path: "{{ root_dir }}/app/oracle/product/12.2.0/dbhome_1"
     state: directory
     mode: '0755'
     owner: oracle
@@ -71,7 +74,7 @@
     recurse: yes
 - name: Create db121 home
   ansible.builtin.file:
-    path: /u01/app/oracle/product/12.1.0/dbhome_1
+    path: "{{ root_dir }}/app/oracle/product/12.1.0/dbhome_1"
     state: directory
     mode: '0755'
     owner: oracle
@@ -79,7 +82,7 @@
     recurse: yes
 - name: Create db112 home
   ansible.builtin.file:
-    path: /u01/app/oracle/product/11.2.0/dbhome_1
+    path: "{{ root_dir }}/app/oracle/product/11.2.0/dbhome_1"
     state: directory
     mode: '0755'
     owner: oracle
@@ -87,26 +90,26 @@
     recurse: yes
 - name: Create grid home
   ansible.builtin.file:
-    path: /u02/app/grid/product/19.3.0/grid_1
+    path: "{{ root_dir }}/app/grid/product/19.3.0/grid_1"
     state: directory
     mode: '0755'
     owner: oracle
     group: dba
     recurse: yes
 - find:
-    paths: /u01/app/oracle/product/19.3.0/dbhome_1
+    paths: "{{ root_dir }}/app/oracle/product/19.3.0/dbhome_1"
     file_type: file
     patterns: "*"
   register: db19files
 - find:
-    paths: /u02/app/grid/product/19.3.0/grid_1
+    paths: "{{ root_dir }}/app/grid/product/19.3.0/grid_1"
     file_type: file
     patterns: "*"
   register: gridfiles
 - name: Extract db19 home
   ansible.builtin.unarchive:
     src: "/home/oracle/software/{{ db19_file }}"
-    dest: /u01/app/oracle/product/19.3.0/dbhome_1
+    dest: "{{ root_dir }}/app/oracle/product/19.3.0/dbhome_1"
     remote_src: yes
     owner: oracle
     group: dba
@@ -114,14 +117,14 @@
 - name: Extract grid home
   ansible.builtin.unarchive:
     src: "/home/oracle/software/{{ grid_file }}"
-    dest: /u02/app/grid/product/19.3.0/grid_1
+    dest: "{{ root_dir }}/app/grid/product/19.3.0/grid_1"
     remote_src: yes
     owner: oracle
     group: dba
   when: gridfiles.matched|int == 0
 - name: Install cvuqdisk
   yum:
-    name: /u02/app/grid/product/19.3.0/grid_1/cv/rpm/cvuqdisk-1.0.10-1.rpm
+    name: "{{ root_dir }}/app/grid/product/19.3.0/grid_1/cv/rpm/cvuqdisk-1.0.10-1.rpm"
     state: present
 - name: Copy db create response file
   ansible.builtin.copy:
@@ -194,5 +197,12 @@
     path: /home/oracle/rbs
     state: directory
     mode: '0755'
+    owner: oracle
+    group: dba
+- name: Extract swingbench
+  ansible.builtin.unarchive:
+    src: "/home/oracle/software/{{ swb_file }}"
+    dest: /home/oracle
+    remote_src: yes
     owner: oracle
     group: dba
